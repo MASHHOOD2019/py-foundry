@@ -63,3 +63,33 @@ Status codes:
 Top 5 IPs:
   203.0.113.7: 4
 ```
+
+## Day 6 - Duplicate File Finder (Python)
+
+`day-06-duplicate-finder/dup_finder.py`
+
+Finds duplicate files under a folder and reports how much disk space
+they waste. Files are grouped by size first, then only same-size files
+are hashed with SHA-256, so big folders scan fast. With `--delete` it
+keeps the first file of each group and deletes the rest, but only after
+you confirm. Stdlib only, no dependencies.
+
+How to run:
+
+```
+python3 dup_finder.py ~/Downloads
+python3 dup_finder.py ~/Pictures --min-size 1MB --json report.json
+python3 dup_finder.py ~/Downloads --delete
+```
+
+Example:
+
+```
+Scanned 6 files, hashed 5 same-size candidates.
+Found 2 duplicate groups, 3 extra copies, 2.3 KB wasted.
+
+Group 1 (3 copies, 1.2 KB each):
+  /tmp/duptest/a.txt
+  /tmp/duptest/b.txt
+  /tmp/duptest/sub/c.txt
+```
