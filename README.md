@@ -93,3 +93,30 @@ Group 1 (3 copies, 1.2 KB each):
   /tmp/duptest/b.txt
   /tmp/duptest/sub/c.txt
 ```
+
+## Day 8 - Secure Password Generator (Python)
+
+`day-08-password-generator/password_generator.py`
+
+Generates cryptographically secure passwords with the `secrets` module
+(never `random`, which is not safe for secrets). Every password is
+guaranteed to contain at least one character from each selected set, and
+each run reports the estimated entropy in bits with a strength rating.
+Stdlib only, no dependencies.
+
+How to run:
+
+```
+python3 password_generator.py
+python3 password_generator.py --length 20 --count 5
+python3 password_generator.py --length 12 --no-symbols --json
+python3 password_generator.py --length 24 --exclude-ambiguous
+```
+
+Example:
+
+```
+*|vDXzySW0'*0!AZ
+
+Entropy: 104.9 bits (Excellent) - pool of 94 characters, length 16
+```
