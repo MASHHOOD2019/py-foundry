@@ -120,3 +120,34 @@ Example:
 
 Entropy: 104.9 bits (Excellent) - pool of 94 characters, length 16
 ```
+
+## Day 10 - URL Health Checker (Python)
+
+`day-10-url-checker/url_checker.py`
+
+Checks a list of URLs and reports which are alive, which redirect, and
+which are broken. Checks run concurrently, HEAD first with an automatic
+GET fallback, retries transient failures (429 / 5xx / timeouts) with
+backoff, and follows redirects while reporting the final URL and redirect
+count. Stdlib only, no dependencies. Exit code 1 when any URL is broken,
+so it fits in a CI step or a pre-publish link audit.
+
+How to run:
+
+```
+python3 url_checker.py https://example.com https://github.com
+python3 url_checker.py --file urls.txt --workers 20
+python3 url_checker.py https://example.com --json --output report.json
+python3 url_checker.py --file urls.txt --csv
+```
+
+Example:
+
+```
+OK            200   789ms  https://example.com
+OK            200   775ms  https://github.com
+CLIENT ERROR  404   653ms  https://example.com/does-not-exist-xyz
+ERROR           -  2863ms  https://nonexistent-domain-xyz12345.com
+
+4 URLs checked in 5080ms: 2 ok, 1 client error, 1 error
+```
