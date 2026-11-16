@@ -151,3 +151,33 @@ ERROR           -  2863ms  https://nonexistent-domain-xyz12345.com
 
 4 URLs checked in 5080ms: 2 ok, 1 client error, 1 error
 ```
+
+## Day 12 - CSV to JSON Converter (Python)
+
+`day-12-csv-to-json/csv2json.py`
+
+Converts a CSV file to a JSON array, or one JSON object per line with
+`--jsonl`, so a spreadsheet export can go straight into an API, a
+script, or a database import. It auto-detects the delimiter (comma,
+tab, semicolon, pipe), infers types (integers, floats, booleans,
+empty cells become null), and turns dotted headers like
+`address.city` into nested objects. Columns can be selected and
+renamed, rows stream through without loading the file into memory,
+and bad rows are reported and skipped instead of aborting the run.
+Stdlib only, no dependencies.
+
+How to run:
+
+```
+python3 csv2json.py data.csv
+python3 csv2json.py data.csv --jsonl --output data.jsonl
+python3 csv2json.py data.csv --columns name,age --rename age=years
+python3 csv2json.py --delimiter ";" --no-infer data.csv
+cat data.csv | python3 csv2json.py --indent 2
+```
+
+Example (on the included `sample.csv`):
+
+```
+[{"name": "Ayesha Khan", "age": 24, "active": true, "address": {"city": "Karachi", "zip": 75600}, "score": 91.5},{"name": "Bilal Ahmed", "age": 31, "active": false, "address": {"city": "Lahore", "zip": null}, "score": 78},{"name": "Sara Malik", "age": 19, "active": true, "address": {"city": "Islamabad", "zip": 44000}, "score": null}]
+```

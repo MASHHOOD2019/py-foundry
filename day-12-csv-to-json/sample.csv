@@ -1,0 +1,4 @@
+name,age,active,address.city,address.zip,score
+Ayesha Khan,24,true,Karachi,75600,91.5
+Bilal Ahmed,31,false,Lahore,,78
+Sara Malik,19,true,Islamabad,44000,
